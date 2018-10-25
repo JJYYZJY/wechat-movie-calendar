@@ -77,7 +77,6 @@ Component({
       if (index < imageList.length) {
         // console.log(imageList[index])
         this.getImageInfo(imageList[index]).then(file => {
-          console.log('downLoadImages getImageInfo',file);
           tempFileList.push(file)
           this.setData({
             tempFileList
@@ -115,10 +114,10 @@ Component({
       this.ctx.draw(false, () => {
         wx.setStorageSync('canvasdrawer_pic_cache', this.cache)
         // this.saveImageToLocal()
-          // 延迟保存图片，解决安卓生成图片错位bug。
-          setTimeout(() => {
-            this.saveImageToLocal()
-          }, 300);
+        // 延迟保存图片，解决安卓生成图片错位bug。
+        setTimeout(() => {
+          this.saveImageToLocal()
+        }, 300);
       })
     },
     drawImage (params) {
@@ -130,7 +129,7 @@ Component({
       //   this.ctx.clip()
       //   this.ctx.drawImage(url, left, top, width, height)
       // } else {
-      this.ctx.drawImage(url, 0, 0, 1280, 811, left, top, width, height)
+      this.ctx.drawImage(url, left, top, width, height)
       // }
       this.ctx.restore()
     },
@@ -235,7 +234,6 @@ Component({
             wx.getImageInfo({
               src: url,
               complete: res => {
-                console.log('getImageInfo',res);
                 if (res.errMsg === 'getImageInfo:ok') {
                   this.cache[url] = res.path
                   resolve(res.path)
@@ -257,11 +255,10 @@ Component({
       wx.canvasToTempFilePath({
         x: 0,
         y: 0,
-        width: width,
-        height: height,
+        width,
+        height,
         canvasId: 'canvasdrawer',
         complete: res => {
-          console.log('canvasToTempFilePath',res);
           if (res.errMsg === 'canvasToTempFilePath:ok') {
             this.setData({
               showCanvas: false,

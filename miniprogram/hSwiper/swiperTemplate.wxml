@@ -1,0 +1,45 @@
+<template name="calendar-page">
+  <view class='head-layout'>
+    <image class='movie-image' mode='aspectFill' src='{{item.images}}'></image>
+  </view>
+
+  <view class='body-layout'>
+
+    <view class='yer-layout'>
+      <text class='year-text'>{{item._year}}</text>
+      <text class='month-text'>{{item._month}}</text>
+      <text class='week-text'>{{item._week}}</text>
+    </view>
+    <view class='center-layout'>
+        <view class='date-layout'>
+          <view class='date-text'>{{item._day}}</view>
+          <view class='date-history-text'>{{item.history_today_name}}</view>
+          <view class='date-history-text'>{{item.history_today_info}}</view>
+        </view>
+    </view>
+
+    <view class='saying-layout'>
+      <text class='saying-text'>{{item.saying}}</text>
+    </view>
+
+    <view class='collect-layout'>
+      <text class='title-text'>{{'《'+item.title+'》'}}1992</text>
+      <view class='rating-layout'>
+        <view class='rating-left-layout'>
+          <text class='rating-text'>{{item.rating}}</text>
+        </view>
+        <view class='rating-right-layout'>
+          <view class='star-layout'>
+            <text class='iconfont icon-star02 star-text'></text>
+            <text class='iconfont icon-star02 star-text'></text>
+            <text class='iconfont icon-star02 star-text'></text>
+            <text class='iconfont icon-star04 star-text'></text>
+            <text class='iconfont icon-star01 star-text'></text>
+          </view>
+          <text class='collect-text'>豆瓣{{item.collect_count}}人评分</text>
+        </view>
+      </view>
+      
+    </view>
+  </view>
+</template>

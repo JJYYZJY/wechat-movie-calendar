@@ -1,0 +1,15 @@
+<!--miniprogram/pages/calendar-home/index.wxml-->
+<View wx:if="{{tasks != null}}" style="width: 100vw; height: 100vh"
+    class="swiper"
+>
+  <comp
+    recycle="{{recyle}}"
+    vertical="{{false}}"
+    templateName="calendar-page"
+    animationType="linear"
+    animationDuration="300"
+    moveTo="{{moveTo}}"
+    dataList="{{tasks}}"
+    options="{{options}}"
+  ></comp>
+</View>

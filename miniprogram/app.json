@@ -1,13 +1,14 @@
 {
   "cloud": true,
   "pages": [
+    "pages/calendar-home/index",
     "pages/calendar-page/index",
     "pages/index/index"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#F2EFE6",
+    "navigationBarBackgroundColor": "#FFEBCC",
     "navigationBarTitleText": "",
     "navigationBarTextStyle": "black"
   }
