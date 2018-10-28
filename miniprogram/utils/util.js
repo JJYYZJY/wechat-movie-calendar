@@ -80,29 +80,29 @@ const number2uppper = n => {
 const formatMonth = month => {
   switch(month){
     case 1:
-      return 'Jan.';
+      return 'JAN.';
     case 2:
-      return 'Feb.';
+      return 'FEB.';
     case 3:
-      return 'Mar.';
+      return 'MAR.';
     case 4:
-      return 'Apr.';
+      return 'APR.';
     case 5:
-      return 'May.';
+      return 'MAY.';
     case 6:
-      return 'June.';
+      return 'JUNE.';
     case 7:
-      return 'July.';
+      return 'JULY.';
     case 8:
-      return 'Aug.';
+      return 'AUG.';
     case 9:
-      return 'Sept.';
+      return 'SEPT.';
     case 10:
-      return 'Oct.';
+      return 'OCT.';
     case 11:
-      return 'Nov.';
+      return 'NOV.';
     case 12:
-      return 'Dec.';
+      return 'DEC.';
   }
   return month+'月';
 }
@@ -110,19 +110,19 @@ const formatMonth = month => {
 const formatWeek = day => {
   switch (day) {
     case 0:
-      return 'Sun.';
+      return 'SUN.';
     case 1:
-      return 'Mon.';
+      return 'MON.';
     case 2:
-      return 'Tues.';
+      return 'TUES.';
     case 3:
-      return 'Wed.';
+      return 'WED.';
     case 4:
-      return 'Thur.';
+      return 'THUR.';
     case 5:
-      return 'Fri.';
+      return 'FRI.';
     case 6:
-      return 'Sat.';
+      return 'SAT.';
   }
   return day;
 }

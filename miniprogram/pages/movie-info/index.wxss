@@ -1,0 +1,75 @@
+/* miniprogram/pages/movie-info/index.wxss */
+@import "../../assets/star.wxss";
+
+page{
+  padding: 10rpx 35rpx;
+}
+
+.head-layout{
+  display: flex;
+  flex-direction: row;
+}
+
+.head-left-layout{
+  width: 360rpx;
+  height: 533rpx;
+}
+
+.title-text{
+  font-size: 14pt;
+  margin-bottom: 10rpx;
+}
+
+.title-english-text{
+  font-size: 12pt;
+  margin-bottom: 20rpx;
+}
+
+.head-label-text{
+  display:inline-block;
+  font-size: 10pt;
+}
+
+.head-label-info-text{
+  font-size: 10pt;
+}
+
+.star-layout{
+  line-height: 10pt;
+  display: block;
+}
+
+.star-text{
+  font-size: 10pt;
+  color:#FFB86C;
+}
+
+.score-text{
+  font-size: 10pt;
+  margin-left: 10rpx;
+}
+
+.head-right-layout{
+  width: 300rpx;
+  height: 533rpx;
+  margin-left: 20rpx;
+}
+
+.image-layout{
+  will-change: transform;
+  width: 360rpx;
+  height: 533rpx;
+  /* border-radius:20rpx; */
+}
+
+.info-layout{
+  width: 680rpx;
+}
+
+.label-text{
+  font-size: 17pt;
+}
+
+.info-text{
+  font-size: 13pt;
+}

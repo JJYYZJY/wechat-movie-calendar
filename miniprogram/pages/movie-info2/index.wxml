@@ -1,0 +1,65 @@
+<!--miniprogram/pages/movie-info2/index.wxml-->
+<view class='content'>
+
+  <view class='title'>
+    <view>{{item.title}}</view>
+  </view>
+
+  <view class='image-layout'>
+    <image class='movie-image' mode='aspectFill' src='{{item.info_image}}'></image>
+  </view>
+
+  <view class='line-layout'>
+    <view class='label-text'>评分:</view>
+    <view class='star-layout'>
+            <text class='iconfont {{item.rating >= 2 ? "icon-star02" : item.rating >= 1 ? "icon-star04" : "icon-star01"}} star-text'></text>
+            <text class='iconfont {{item.rating >= 4 ? "icon-star02" : item.rating >= 3 ? "icon-star04" : "icon-star01"}} star-text'></text>
+            <text class='iconfont {{item.rating >= 6 ? "icon-star02" : item.rating >= 5 ? "icon-star04" : "icon-star01"}} star-text'></text>
+            <text class='iconfont {{item.rating >= 8 ? "icon-star02" : item.rating >= 7 ? "icon-star04" : "icon-star01"}} star-text'></text>
+            <text class='iconfont {{item.rating >= 9.5 ? "icon-star02" : item.rating >= 8.5 ? "icon-star04" : "icon-star01"}} star-text'></text>
+            <text class='score-text'>{{item.rating}}</text>
+    </view>
+  </view>
+
+  <view class='line-layout'>
+    <view class='label-text'>类型:</view>
+    <view class='info-text'>{{item.genres}}</view>
+  </view>
+
+  <view class='line-layout'>
+    <view class='label-text'>日期:</view>
+    <view class='info-text'>{{item.year}}</view>
+  </view>
+
+  <view class='line-layout'>
+    <view class='label-text'>导演:</view>
+    <view class='info-text'>{{item.director}}</view>
+  </view>
+
+  <view class='line-layout'>
+    <view class='label-text'>编剧:</view>
+    <view class='info-text'>
+      <view wx:for='{{item.screenwriter}}' wx:key='unique' wx:for-item='writer'>{{writer}}</view>  
+    </view>
+  </view>
+
+  <view class='line-layout'>
+    <view class='label-text'>演员:</view>
+    <view class='info-text'>
+      <view wx:for='{{item.casts}}' wx:key='unique' wx:for-item='cast'>{{cast}}</view>  
+    </view>
+  </view>
+
+  <view class='line-layout'>
+    <view class='label-text'>简介:</view>
+    <text class='info-text' space='ensp'>{{item.info}}</text>
+  </view>
+
+  <view class='line-layout' wx:if='{{item.toast}}'>
+    <view class='label-text'>资源:</view>
+    <text class='info-text' space='ensp'>{{item.toast}}</text>
+  </view>
+
+</view>
+
+<view class='font-title-bg font-title-bg-style'>{{title}}</view>

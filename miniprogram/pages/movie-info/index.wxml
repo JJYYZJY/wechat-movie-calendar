@@ -1,0 +1,40 @@
+<!--miniprogram/pages/movie-info/index.wxml-->
+<view class='head-layout'>
+  <view class='head-left-layout'>
+    <image class='image-layout' src='{{task.info_url}}' mode='aspectFill'></image>
+  </view>
+  <view class='head-right-layout'>
+    <view class='title-text' selectable='true'>{{task.title}}</view>
+    <view class='title-english-text' selectable='true'>{{task.title_e}}({{task.year}})</view>
+    <view class='head-label-text'>导演:</view>
+    <view class='head-label-info-text'>{{task.director}}</view>
+    <view class='head-label-text'>编剧:</view>
+    <view class='head-label-info-text'>{{task.screenwriter}}</view>
+    <view class='head-label-text'>主演:</view>
+    <view class='head-label-info-text'>{{task.starring}}</view>
+    <view class='head-label-text'>类型:</view>
+    <view class='head-label-info-text'>{{task.category}}</view>
+    <view class='head-label-text'>评分:</view>
+    <view class='star-layout'>
+            <text class='iconfont {{task.rating >= 2 ? "icon-star02" : task.rating >= 1 ? "icon-star04" : "icon-star01"}} star-text'></text>
+            <text class='iconfont {{task.rating >= 4 ? "icon-star02" : task.rating >= 3 ? "icon-star04" : "icon-star01"}} star-text'></text>
+            <text class='iconfont {{task.rating >= 6 ? "icon-star02" : task.rating >= 5 ? "icon-star04" : "icon-star01"}} star-text'></text>
+            <text class='iconfont {{task.rating >= 8 ? "icon-star02" : task.rating >= 7 ? "icon-star04" : "icon-star01"}} star-text'></text>
+            <text class='iconfont {{task.rating >= 9.5 ? "icon-star02" : task.rating >= 8.5 ? "icon-star04" : "icon-star01"}} star-text'></text>
+            <text class='score-text'>{{task.rating}}</text>
+    </view>
+  </view>
+</view>
+
+<view class='info-layout'>
+  <text class='label-text'>简介</text>
+</view>
+<view class='info-layout'>
+  <text class='info-text' space='ensp'>{{task.info}}</text>
+</view>
+<view class='info-layout'>
+  <text class='label-text'>资源</text>
+</view>
+<view class='info-layout'>
+  <text class='info-text' space='ensp'>{{task.toast}}</text>
+</view>

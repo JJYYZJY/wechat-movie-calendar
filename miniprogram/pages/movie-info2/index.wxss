@@ -1,0 +1,58 @@
+/* miniprogram/pages/movie-info2/index.wxss */
+@import "../../assets/star.wxss";
+
+.content{
+  padding: 20rpx;
+  color: rgb(31, 31, 30);
+}
+
+.title{
+  width: fit-content;
+  margin: 0px auto;
+  align-items: center;
+  font-size: 48rpx;
+}
+
+.image-layout{
+  text-align: center;
+  margin: 60rpx 60rpx;
+}
+
+.line-layout{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 40rpx 60rpx;
+}
+
+.label-text{
+  width: 20%;
+  margin-right: 10rpx;
+  font-size: 40rpx;
+}
+
+.info-text{
+  width: 80%;
+  font-size: 30rpx;
+}
+
+.movie-image{
+  will-change: transform;
+  width: 360rpx;
+  height: 533rpx;
+}
+
+.star-layout{
+  line-height: 30rpx;
+  display: block;
+}
+
+.star-text{
+  font-size: 30rpx;
+  color:#FFB86C;
+}
+
+.score-text{
+  font-size: 30rpx;
+  margin-left: 10rpx;
+}

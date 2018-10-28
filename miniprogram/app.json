@@ -2,13 +2,16 @@
   "cloud": true,
   "pages": [
     "pages/calendar-home/index",
+    "pages/movie-info/index",
     "pages/calendar-page/index",
-    "pages/index/index"
+    "pages/index/index",
+    "pages/share-image/index",
+    "pages/movie-info2/index"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#FFEBCC",
+    "navigationBarBackgroundColor": "#F2EFE6",
     "navigationBarTitleText": "",
     "navigationBarTextStyle": "black"
   }

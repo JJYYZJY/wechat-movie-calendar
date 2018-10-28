@@ -1,6 +1,6 @@
 <!--miniprogram/pages/calendar-home/index.wxml-->
-<View wx:if="{{tasks != null}}" style="width: 100vw; height: 100vh"
-    class="swiper"
+<View wx:if="{{tasks != null}}"
+    class="swiper swiper-layout"
 >
   <comp
     recycle="{{recyle}}"
@@ -8,8 +8,13 @@
     templateName="calendar-page"
     animationType="linear"
     animationDuration="300"
-    moveTo="{{moveTo}}"
+    initIndex="{{initIndex}}"
     dataList="{{tasks}}"
     options="{{options}}"
+    bind:afterViewChange="afterViewChange"
   ></comp>
 </View>
+
+<view hidden='{{!isShowMenu}}' class='btn-float btn-float-1 iconfont icon-chakan4' bindtap='gotoMovieInfo'></view>
+<view hidden='{{!isShowMenu}}' class='btn-float btn-float-2 iconfont icon-baocun' bindtap='gotoShareImage'></view>
+<view class='btn-float btn-float-3 iconfont {{isShowMenu ? "icon-xingzhuanggongnengtubiao-" : "icon-lvsefenkaicankaoxianban-"}}' bindtap='showMenu'></view>

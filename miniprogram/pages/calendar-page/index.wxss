@@ -1,5 +1,4 @@
 /* miniprogram/pages/calendar-page/index.wxss */
-@import "../../assets/star.wxss";
 
 page{
   padding: 0px;

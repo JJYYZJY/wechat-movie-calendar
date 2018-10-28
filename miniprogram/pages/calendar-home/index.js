@@ -7,10 +7,12 @@ Page({
    * 页面的初始数据
    */
   data: {
-    moveTo: 2,
+    isShowMenu: false,
+    initIndex: 0,
     recyle: false,
     tasks: null,
-    options: {}//透传到模版中的数据
+    options: {},//透传到模版中的数据
+    currentItem: null
   },
 
   getCalendarPage: function () {
@@ -27,8 +29,9 @@ Page({
         util.innerDate(task,task._date)
       })
       that.setData({
-        moveTo: 2 + tasks.length - 1,
-        tasks: tasks
+        initIndex: tasks.length-1,
+        tasks: tasks,
+        currentItem: tasks[tasks.length-1]
       });
     });
   },
@@ -89,6 +92,31 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  showMenu: function () {
+    this.setData({
+      isShowMenu:!this.data.isShowMenu
+    })
+  },
+  
+  afterViewChange: function(e) {
+    console.log('afterViewChange', e)
+    this.setData({
+      currentItem:e.detail.item
+    })
+  },
+
+  gotoShareImage: function() {
+      wx.navigateTo({
+        url: '../share-image/index?task='+JSON.stringify(this.data.currentItem),
+      })
+  },
+
+  gotoMovieInfo: function() {
+    wx.navigateTo({
+      url: '../movie-info2/index?task=' + JSON.stringify(this.data.currentItem),
+    })
   }
 
 })

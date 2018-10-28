@@ -1,5 +1,44 @@
 /* miniprogram/pages/calendar-home/index.wxss */
+@import "../../assets/star.wxss";
 
-.view-pager-class{
+.swiper-layout{
+  width: 100vw;
   height: 100vh;
+}
+
+.btn-float {
+  position: fixed;
+  top: 90vh;
+  right: 40rpx;
+  width: 100rpx;
+  height: 100rpx;
+  text-align: center;
+  align-content: center;
+  text-decoration: none;
+  z-index: 400;
+  border-radius: 50%;
+  color: #FEFFFA;
+  background-color: rgb(219, 88, 127);
+  line-height: 100rpx;
+  font-size: 40rpx;
+  box-shadow: 0 3px 5px rgba(0,0,0,.6);
+}
+
+.btn-float:active {
+  background-color: rgb(182, 73, 105);
+}
+
+.btn-float-1 {
+  top: 70vh;
+  z-index: 397;
+}
+
+.btn-float-2 {
+  top: 80vh;
+  z-index: 398;
+}
+
+.btn-float-3 {
+  top: 90vh;
+  z-index: 399;
 }

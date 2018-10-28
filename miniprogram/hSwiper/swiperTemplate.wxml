@@ -5,10 +5,10 @@
 
   <view class='body-layout'>
 
-    <view class='yer-layout'>
-      <text class='year-text'>{{item._year}}</text>
-      <text class='month-text'>{{item._month}}</text>
-      <text class='week-text'>{{item._week}}</text>
+    <view class='year-layout'>
+      <view class='year-text'>{{item._year}}</view>
+      <view class='month-text'>{{item._month}}</view>
+      <view class='week-text'>{{item._week}}</view>
     </view>
     <view class='center-layout'>
         <view class='date-layout'>
@@ -23,18 +23,20 @@
     </view>
 
     <view class='collect-layout'>
-      <text class='title-text'>{{'《'+item.title+'》'}}1992</text>
+      <view class='title-layout'>
+        <text class='title-text'>{{'《'+item.title+'》'}}</text>      
+      </view>
       <view class='rating-layout'>
         <view class='rating-left-layout'>
           <text class='rating-text'>{{item.rating}}</text>
         </view>
         <view class='rating-right-layout'>
           <view class='star-layout'>
-            <text class='iconfont icon-star02 star-text'></text>
-            <text class='iconfont icon-star02 star-text'></text>
-            <text class='iconfont icon-star02 star-text'></text>
-            <text class='iconfont icon-star04 star-text'></text>
-            <text class='iconfont icon-star01 star-text'></text>
+            <text class='iconfont {{item.rating >= 2 ? "icon-star02" : item.rating >= 1 ? "icon-star04" : "icon-star01"}} star-text'></text>
+            <text class='iconfont {{item.rating >= 4 ? "icon-star02" : item.rating >= 3 ? "icon-star04" : "icon-star01"}} star-text'></text>
+            <text class='iconfont {{item.rating >= 6 ? "icon-star02" : item.rating >= 5 ? "icon-star04" : "icon-star01"}} star-text'></text>
+            <text class='iconfont {{item.rating >= 8 ? "icon-star02" : item.rating >= 7 ? "icon-star04" : "icon-star01"}} star-text'></text>
+            <text class='iconfont {{item.rating >= 9.5 ? "icon-star02" : item.rating >= 8.5 ? "icon-star04" : "icon-star01"}} star-text'></text>
           </view>
           <text class='collect-text'>豆瓣{{item.collect_count}}人评分</text>
         </view>
