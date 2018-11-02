@@ -18,7 +18,7 @@ Page({
 
   getCalendarPage: function () {
     const that = this;
-    const date = 20181104;//parseInt(util.formatTime(new Date()));
+    const date = parseInt(util.formatTime(new Date()));
     console.log('date', date);
     const _ = db.command
     db.collection('calendar-pages').where({

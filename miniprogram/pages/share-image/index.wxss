@@ -11,6 +11,21 @@
   height: 500px;
 }
 
+.bottom-layout{
+  width: 100vw;
+  padding-bottom: 20px;
+}
+
 .save-btn{
   width: 300px;
+}
+
+.tab-text{
+  font-size: 18px;
+  color: rgb(37, 35, 35);
+}
+
+.tab-text-select{
+  font-size: 18px;
+  color: rgb(219, 88, 127);
 }

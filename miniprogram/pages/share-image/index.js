@@ -1,4 +1,5 @@
 // miniprogram/pages/share-image/index.js
+const { $Message } = require('../../dist/base/index');
 const db = wx.cloud.database();
 
 Page({
@@ -7,7 +8,33 @@ Page({
    * 页面的初始数据
    */
   data: {
+    imageType: 1,
+    imageUrl: null,
+    sayingUrl: null,
+    task: null,
+    image_tempFileUrl: null,
+    acode_tempFileUrl: null,
+    mainImageInfo: null
+  },
 
+  canvasDayImage: function () {
+    if(this.data.imageType == 1){
+      return;
+    }
+    this.setData({
+      imageType:1
+    })
+    this.drawImage(this, this.data.task, this.data.image_tempFileUrl, this.data.acode_tempFileUrl, this.data.mainImageInfo)
+  },
+
+  canvasSayingImage: function () {
+    if (this.data.imageType == 2) {
+      return;
+    }
+    this.setData({
+      imageType: 2
+    })
+    this.drawSayingImage(this, this.data.task, this.data.image_tempFileUrl, this.data.acode_tempFileUrl, this.data.mainImageInfo)
   },
 
   eventGetImage: function (event) {
@@ -22,6 +49,10 @@ Page({
       filePath: this.data.imageUrl,
       success: function (res) {
         console.log('success', res);
+        $Message({
+          content: '保存成功，已保存到手机相册',
+          type: 'success'
+        });
       },
       fail: function (res) {
         console.log('fail', res);
@@ -181,6 +212,162 @@ Page({
           ,{
             type: 'text',
             content: "豆瓣" + task.collect_count+"人评分",
+            fontSize: 12,
+            textAlign: 'left',
+            top: height - 20,
+            left: 58
+          }
+          ,
+          {
+            type: 'image',
+            url: task.rating >= 2 ? "../../images/star_02.png" : task.rating >= 1 ? "../../images/star_04.png" : "../../images/star_01.png",
+            top: height - 34,
+            left: 58,
+            width: 14,
+            height: 14
+          }
+          ,
+          {
+            type: 'image',
+            url: task.rating >= 4 ? "../../images/star_02.png" : task.rating >= 3 ? "../../images/star_04.png" : "../../images/star_01.png",
+            top: height - 34,
+            left: 72,
+            width: 14,
+            height: 14
+          }
+          ,
+          {
+            type: 'image',
+            url: task.rating >= 6 ? "../../images/star_02.png" : task.rating >= 5 ? "../../images/star_04.png" : "../../images/star_01.png",
+            top: height - 34,
+            left: 86,
+            width: 14,
+            height: 14
+          }
+          ,
+          {
+            type: 'image',
+            url: task.rating >= 8 ? "../../images/star_02.png" : task.rating >= 7 ? "../../images/star_04.png" : "../../images/star_01.png",
+            top: height - 34,
+            left: 100,
+            width: 14,
+            height: 14
+          }
+          ,
+          {
+            type: 'image',
+            url: task.rating >= 9.5 ? "../../images/star_02.png" : task.rating >= 8.5 ? "../../images/star_04.png" : "../../images/star_01.png",
+            top: height - 34,
+            left: 114,
+            width: 14,
+            height: 14
+          }
+          ,
+          {
+            type: 'image',
+            url: acodeUrl,
+            top: height - 60,
+            left: width - 60,
+            width: 50,
+            height: 50
+          }
+        ]
+      }
+    })
+
+
+  },
+
+  drawSayingImage: function (that, task, imageUrl, acodeUrl, mainImageInfo) {
+    console.log('drawSayingImage task', task, 'imageUrl', imageUrl, 'acodeUrl', acodeUrl);
+
+    var width = 375;
+    var height = 625;
+
+    var imageWidth = width;
+    var imageHeight = 250;
+
+    var line5Top = imageHeight + 100;
+
+    var imageSourceWidth = 0;
+    var imageSourceHeight = 0;
+    var mwr = mainImageInfo.width / imageWidth;
+    var mhr = mainImageInfo.height / imageHeight;
+    console.log(mwr, mhr)
+    var imageSourceTop = 0;
+    var imageSourceLeft = 0;
+    if (mwr < mhr) {
+      imageSourceWidth = mainImageInfo.width;
+      imageSourceHeight = imageHeight * mwr;
+      imageSourceTop = (mainImageInfo.height - imageSourceHeight) / 2;
+    } else if (mhr < mwr) {
+      imageSourceWidth = imageWidth * mhr;
+      imageSourceHeight = mainImageInfo.height;
+      imageSourceLeft = (mainImageInfo.width - imageSourceWidth) / 2;
+    }
+    console.log(mainImageInfo.width, mainImageInfo.height, mainImageInfo.width / mainImageInfo.height)
+    console.log(imageSourceWidth, imageSourceHeight, imageSourceWidth / imageSourceHeight)
+    console.log(imageWidth, imageHeight, imageWidth / imageHeight)
+    console.log(imageSourceTop, imageSourceLeft)
+    that.setData({
+      painting: {
+        width: width,
+        height: height,
+        views: [
+          {
+            type: 'rect',
+            background: '#FFFFFF',
+            top: 0,
+            left: 0,
+            width: width,
+            height: height
+          },
+          {
+            type: 'image',
+            url: imageUrl,
+            top: 0,
+            left: 0,
+            width: imageWidth,
+            height: imageHeight,
+            sTop: imageSourceTop,
+            sLeft: imageSourceLeft,
+            sWidth: imageSourceWidth,
+            sHeight: imageSourceHeight
+          }
+          ,
+          {
+            type: 'text',
+            content: task.saying,
+            textAlign: 'left',
+            top: line5Top,
+            left: 20,
+            fontSize: 18,
+            width: 295,
+            MaxLineNumber: 3,
+            breakWord: true,
+            lineHeight: 34
+          }
+          ,
+          {
+            type: 'text',
+            content: "《" + task.title + "》",
+            fontSize: 18,
+            textAlign: 'left',
+            top: height - 58,
+            left: 0
+          }
+          ,
+          {
+            type: 'text',
+            content: task.rating,
+            fontSize: 32,
+            textAlign: 'left',
+            top: height - 40,
+            left: 6
+          }
+          , {
+            type: 'text',
+            content: "豆瓣" + task.collect_count + "人评分",
             fontSize: 12,
             textAlign: 'left',
             top: height - 20,
