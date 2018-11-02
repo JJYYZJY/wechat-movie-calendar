@@ -1,5 +1,6 @@
 // miniprogram/pages/calendar-home/index.js
 const util = require('../../utils/util.js');
+const systemInfoUtil = require('../../utils/systemInfoUtil.js');
 const db = wx.cloud.database();
 Page({
 
@@ -17,7 +18,7 @@ Page({
 
   getCalendarPage: function () {
     const that = this;
-    const date = parseInt(util.formatTime(new Date()));
+    const date = 20181104;//parseInt(util.formatTime(new Date()));
     console.log('date', date);
     const _ = db.command
     db.collection('calendar-pages').where({
@@ -49,7 +50,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+    systemInfoUtil.initSystemInfo();
   },
 
   /**

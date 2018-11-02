@@ -2,6 +2,7 @@
 
   "usingComponents": {
     "canvasdrawer": "/libs/canvasdrawer/canvasdrawer"
-  }
+  },
+  "disableScroll": true
   
 }

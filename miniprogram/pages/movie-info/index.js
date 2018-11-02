@@ -1,4 +1,5 @@
 // miniprogram/pages/movie-info/index.js
+//代码废弃
 Page({
 
   /**

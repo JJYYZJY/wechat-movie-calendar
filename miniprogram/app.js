@@ -6,7 +6,7 @@ App({
       console.error('请使用 2.2.3 或以上的基础库以使用云能力')
     } else {
       wx.cloud.init({
-        env: 'movie-calenda-online-123',
+        env: 'movie-calendar-test-123',
         traceUser: true,
       })
     }

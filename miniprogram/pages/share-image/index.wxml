@@ -1,6 +1,7 @@
 <!--miniprogram/pages/share-image/index.wxml-->
 <import src="../../libs/loading/loading.wxml"/>
 <template wx:if="{{!imageUrl}}" is="loading1"></template>
+<text wx:if="{{!imageUrl}}">生成图片比较耗时请耐心等待，预计需要10秒左右</text>
 <canvasdrawer painting="{{painting}}" bind:getImage="eventGetImage"/>
 <view class='center-layout'>
   <image class='image-canvas' mode='widthFix' src='{{imageUrl}}'></image>

@@ -29,13 +29,14 @@ Page({
     })
   },
 
-  drawImage: function(that,task,imageUrl,acodeUrl){
+  drawImage: function(that,task,imageUrl,acodeUrl,mainImageInfo){
     console.log('drawImage task',task,'imageUrl',imageUrl,'acodeUrl',acodeUrl);
 
     var width = 375;
     var height = 625;
 
-    var imageHeight = 244;
+    var imageWidth = width;
+    var imageHeight = 250;
 
     var line1Top = imageHeight + 4;
     var line1Size = 14;
@@ -47,6 +48,26 @@ Page({
     var line4Size = 14;
     var line5Top = line4Top + line4Size + 30;
 
+    var imageSourceWidth = 0;
+    var imageSourceHeight = 0;
+    var mwr = mainImageInfo.width / imageWidth;
+    var mhr = mainImageInfo.height / imageHeight;
+    console.log(mwr,mhr)
+    var imageSourceTop = 0;    
+    var imageSourceLeft = 0;
+    if (mwr < mhr){
+      imageSourceWidth = mainImageInfo.width;
+      imageSourceHeight = imageHeight * mwr;
+      imageSourceTop = (mainImageInfo.height - imageSourceHeight) / 2;
+    }else if (mhr < mwr){
+      imageSourceWidth = imageWidth * mhr;
+      imageSourceHeight = mainImageInfo.height;
+      imageSourceLeft = (mainImageInfo.width - imageSourceWidth) / 2;
+    }
+    console.log(mainImageInfo.width, mainImageInfo.height, mainImageInfo.width / mainImageInfo.height)
+    console.log(imageSourceWidth,imageSourceHeight,imageSourceWidth/imageSourceHeight)
+    console.log(imageWidth, imageHeight, imageWidth / imageHeight)
+    console.log(imageSourceTop, imageSourceLeft)
     that.setData({
       painting: {
         width: width,
@@ -65,8 +86,12 @@ Page({
             url: imageUrl,
             top: 0,
             left: 0,
-            width: width,
-            height: imageHeight
+            width: imageWidth,
+            height: imageHeight,
+            sTop: imageSourceTop,
+            sLeft: imageSourceLeft,
+            sWidth: imageSourceWidth,
+            sHeight: imageSourceHeight
           }
           ,
           {
@@ -240,9 +265,19 @@ Page({
         that.setData({
           image_tempFileUrl: res.tempFilePath
         })
-        if (that.data.acode_tempFileUrl){
-          that.drawImage(that,that.data.task, res.tempFilePath, that.data.acode_tempFileUrl)
-        }
+        wx.getImageInfo({
+          src: res.tempFilePath,
+          success: imageInfoRes => {
+            console.log('getImageInfo',imageInfoRes);
+            that.setData({
+              mainImageInfo: imageInfoRes
+            })
+            if (that.data.acode_tempFileUrl) {
+              that.drawImage(that, that.data.task, res.tempFilePath, that.data.acode_tempFileUrl, imageInfoRes)
+            }
+          }
+        })
+        
       }
     })
   },
@@ -265,7 +300,7 @@ Page({
             acode_tempFileUrl: res.tempFilePath
           })
           if(that.data.image_tempFileUrl){
-            that.drawImage(that,that.data.task, that.data.image_tempFileUrl, res.tempFilePath)
+            that.drawImage(that,that.data.task, that.data.image_tempFileUrl, res.tempFilePath, that.data.mainImageInfo)
           }
         }
       });

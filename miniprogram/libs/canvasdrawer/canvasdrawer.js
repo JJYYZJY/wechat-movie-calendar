@@ -1,5 +1,5 @@
 /* global Component wx */
-
+const systemInfoUtil = require('../../utils/systemInfoUtil.js');
 Component({
   properties: {
     painting: {
@@ -122,14 +122,18 @@ Component({
     },
     drawImage (params) {
       this.ctx.save()
-      const { url, top = 0, left = 0, width = 0, height = 0, borderRadius = 0 } = params
+      const { url, top = 0, left = 0, width = 0, height = 0, sTop = 0, sLeft = 0, sWidth = 0, sHeight = 0, borderRadius = 0 } = params
       // if (borderRadius) {
       //   this.ctx.beginPath()
       //   this.ctx.arc(left + borderRadius, top + borderRadius, borderRadius, 0, 2 * Math.PI)
       //   this.ctx.clip()
       //   this.ctx.drawImage(url, left, top, width, height)
       // } else {
-      this.ctx.drawImage(url, left, top, width, height)
+      if (sWidth > width && sHeight > height && systemInfoUtil.compareSystemVersion("1.9.0") >= 0){
+        this.ctx.drawImage(url, sLeft, sTop, sWidth, sHeight, left, top, width, height)
+      }else{
+        this.ctx.drawImage(url, left, top, width, height)
+      }
       // }
       this.ctx.restore()
     },
