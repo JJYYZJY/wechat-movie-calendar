@@ -1,5 +1,5 @@
 <template name="calendar-page">
-  <view class='head-layout'>
+  <view class='head-layout' bindtap='gotoMovieInfo'>
     <image class='movie-image' mode='aspectFill' src='{{item.images}}'></image>
   </view>
 

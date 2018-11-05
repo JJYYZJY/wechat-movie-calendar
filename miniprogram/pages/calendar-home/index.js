@@ -23,9 +23,14 @@ Page({
     const _ = db.command
     db.collection('calendar-pages').where({
       date: _.lte(date)
-    }).get().then(res => {
+    })
+    .orderBy('date','desc')
+    .limit(15)
+    .get()
+    .then(res => {
       console.log(res);
       var tasks = res.data;
+      tasks = tasks.reverse();
       tasks.forEach(task=>{
         util.innerDate(task,task._date)
       })
@@ -101,10 +106,9 @@ Page({
     })
   },
   
-  afterViewChange: function(e) {
-    console.log('afterViewChange', e)
+  onBindChange: function(e) {
     this.setData({
-      currentItem:e.detail.item
+      currentItem: this.data.tasks[e.detail.current]
     })
   },
 

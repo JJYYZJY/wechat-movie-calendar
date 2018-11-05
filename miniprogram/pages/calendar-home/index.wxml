@@ -1,18 +1,14 @@
 <!--miniprogram/pages/calendar-home/index.wxml-->
+<import src="/hSwiper/swiperTemplate.wxml"/>
 <View wx:if="{{tasks != null}}"
-    class="swiper swiper-layout"
->
-  <comp
-    recycle="{{recyle}}"
-    vertical="{{false}}"
-    templateName="calendar-page"
-    animationType="linear"
-    animationDuration="300"
-    initIndex="{{initIndex}}"
-    dataList="{{tasks}}"
-    options="{{options}}"
-    bind:afterViewChange="afterViewChange"
-  ></comp>
+    class="swiper-layout">
+  <swiper class='swiper-page' indicator-dots='{{false}}' autoplay='{{false}}' current="{{initIndex}}" duration="{{300}}" bindchange="onBindChange">
+    <block wx:for="{{tasks}}" wx:key="unique">
+      <swiper-item>
+        <template is="calendar-page" data="{{item, index, options}}"></template>
+      </swiper-item>
+    </block>
+  </swiper>
 </View>
 
 <view hidden='{{!isShowMenu}}' class='btn-float btn-float-1 iconfont icon-chakan4' bindtap='gotoMovieInfo'></view>
