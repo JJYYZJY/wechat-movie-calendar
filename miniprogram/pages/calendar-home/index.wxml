@@ -11,6 +11,6 @@
   </swiper>
 </View>
 
-<view hidden='{{!isShowMenu}}' class='btn-float btn-float-1 iconfont icon-chakan4' bindtap='gotoMovieInfo'></view>
-<view hidden='{{!isShowMenu}}' class='btn-float btn-float-2 iconfont icon-baocun' bindtap='gotoShareImage'></view>
+<view hidden='{{false}}' class='btn-float btn-float-1 iconfont icon-chakan4' bindtap='gotoMovieInfo' animation="{{btnMovieAnimation}}"></view>
+<view hidden='{{false}}' class='btn-float btn-float-2 iconfont icon-baocun' bindtap='gotoShareImage' animation="{{btnShareAnimation}}"></view>
 <view class='btn-float btn-float-3 iconfont {{isShowMenu ? "icon-xingzhuanggongnengtubiao-" : "icon-lvsefenkaicankaoxianban-"}}' bindtap='showMenu'></view>

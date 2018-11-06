@@ -533,6 +533,9 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    console.log('onShareAppMessage');
+    return {
+      path: '/pages/calendar-home/index?source=shareImage'
+    }
   }
 })

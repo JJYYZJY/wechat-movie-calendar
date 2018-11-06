@@ -13,11 +13,27 @@ Page({
    */
   onLoad: function (options) {
     console.log('onLoad options',options);
-    let task = JSON.parse(options.task);
-    console.log('onLoad task', task);
-    this.setData({
-      item:task
-    })
+    var that = this;
+
+    if (options.source == 'movieInfo' && options.movieId){
+
+      wx.cloud.database().collection('calendar-pages').where({
+        _id:options.movieId
+      }).get().then(res => {
+        console.log('getItemsResult',res);
+        this.setData({
+          item:res.data[0]
+        })
+      });
+
+    }else{
+      let task = JSON.parse(options.task);
+      console.log('onLoad task', task);
+      this.setData({
+        item: task
+      })
+    }
+    
   },
 
   /**
@@ -65,7 +81,11 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
+  onShareAppMessage: function (res) {
+    console.log('onShareAppMessage',res);
+    return {
+      title: "今日电影《"+this.data.item.title+"》",
+      path: this.route+'?source=movieInfo&movieId='+this.data.item._id
+    }
   }
 })

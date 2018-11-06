@@ -30,14 +30,31 @@ function compareVersion(v1, v2) {
 }
 
 const systemVersion = null;
-function initSystemInfo(){
+function initSystemInfo(success){
   var that = this
   wx.getSystemInfo({
     success: function(res) {
       console.log('getSystemInfo',res)
-      that.systemVersion = res.SDKVersion
+      that.systemVersion = res.SDKVersion,
+      that.systemInfo = {
+        windowWidth: res.windowWidth,
+        windowHeight: res.windowHeight
+      }
+      success(res);
     },
   })
+}
+
+function getSystemInfo(){
+  if (this.systemInfo == null) {
+    console.log('systemInfo == null')
+    let res = wx.getSystemInfoSync()
+    this.systemInfo = {
+      windowWidth: res.windowWidth,
+      windowHeight: res.windowHeight
+    }
+  }
+  return this.systemInfo;
 }
 
 function compareSystemVersion(sVersion){
@@ -50,5 +67,6 @@ function compareSystemVersion(sVersion){
 
 module.exports = {
   initSystemInfo: initSystemInfo,
+  getSystemInfo: getSystemInfo,
   compareSystemVersion: compareSystemVersion
 }

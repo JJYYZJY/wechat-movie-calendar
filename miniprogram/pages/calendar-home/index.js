@@ -55,7 +55,13 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    systemInfoUtil.initSystemInfo();
+    var that = this;
+    systemInfoUtil.initSystemInfo( res => {
+      console.log(res);
+      that.setData({
+        rpxRate: res.windowWidth/750
+      })
+    });
   },
 
   /**
@@ -101,8 +107,27 @@ Page({
   },
 
   showMenu: function () {
+    console.log('showMenu', this.data.isShowMenu)
+    var that = this;
+    var isShowMenu = !this.data.isShowMenu;
     this.setData({
-      isShowMenu:!this.data.isShowMenu
+      isShowMenu: isShowMenu
+    })
+    var moiveAnimation = wx.createAnimation({
+      duration: 300,
+      timingFunction: 'ease-out'
+    });
+    var shareAnimation = wx.createAnimation({
+      duration: 300,
+      timingFunction: 'ease-out'
+    });
+    moiveAnimation.translateY(isShowMenu ? -240 * this.data.rpxRate : 0)
+      .step();
+    shareAnimation.translateY(isShowMenu ? -120 * this.data.rpxRate : 0)
+      .step();
+    this.setData({
+      btnMovieAnimation: moiveAnimation.export(),
+      btnShareAnimation: shareAnimation.export()
     })
   },
   
