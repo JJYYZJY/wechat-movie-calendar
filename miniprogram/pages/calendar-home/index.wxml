@@ -1,5 +1,5 @@
 <!--miniprogram/pages/calendar-home/index.wxml-->
-<import src="/hSwiper/swiperTemplate.wxml"/>
+<import src="/swipers/template2/swiperTemplate.wxml"/>
 <View wx:if="{{tasks != null}}"
     class="swiper-layout">
   <swiper class='swiper-page' indicator-dots='{{false}}' autoplay='{{false}}' current="{{initIndex}}" duration="{{300}}" bindchange="onBindChange">

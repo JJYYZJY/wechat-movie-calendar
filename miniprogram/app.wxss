@@ -4,8 +4,8 @@
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
-} 
+}
 
 page{
-  background: #F2EFE6;
+  background: #fff;
 }

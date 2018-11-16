@@ -2,18 +2,19 @@
 const util = require('../../utils/util.js');
 const systemInfoUtil = require('../../utils/systemInfoUtil.js');
 const db = wx.cloud.database();
+var rpxRate = null;
+var isShowMenu = false;
+var currentItem = null;
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    isShowMenu: false,
     initIndex: 0,
-    recyle: false,
     tasks: null,
-    options: {},//透传到模版中的数据
-    currentItem: null
+    options: {}//透传到模版中的数据
   },
 
   getCalendarPage: function () {
@@ -37,8 +38,8 @@ Page({
       that.setData({
         initIndex: tasks.length-1,
         tasks: tasks,
-        currentItem: tasks[tasks.length-1]
       });
+      currentItem = tasks[tasks.length - 1]
     });
   },
 
@@ -58,9 +59,7 @@ Page({
     var that = this;
     systemInfoUtil.initSystemInfo( res => {
       console.log(res);
-      that.setData({
-        rpxRate: res.windowWidth/750
-      })
+      rpxRate = res.windowWidth/750
     });
   },
 
@@ -107,12 +106,9 @@ Page({
   },
 
   showMenu: function () {
-    console.log('showMenu', this.data.isShowMenu)
+    console.log('showMenu', isShowMenu, rpxRate)
     var that = this;
-    var isShowMenu = !this.data.isShowMenu;
-    this.setData({
-      isShowMenu: isShowMenu
-    })
+    isShowMenu = !isShowMenu;
     var moiveAnimation = wx.createAnimation({
       duration: 300,
       timingFunction: 'ease-out'
@@ -121,9 +117,9 @@ Page({
       duration: 300,
       timingFunction: 'ease-out'
     });
-    moiveAnimation.translateY(isShowMenu ? -240 * this.data.rpxRate : 0)
+    moiveAnimation.translateY(isShowMenu ? -240 * rpxRate : 0)
       .step();
-    shareAnimation.translateY(isShowMenu ? -120 * this.data.rpxRate : 0)
+    shareAnimation.translateY(isShowMenu ? -120 * rpxRate : 0)
       .step();
     this.setData({
       btnMovieAnimation: moiveAnimation.export(),
@@ -132,20 +128,18 @@ Page({
   },
   
   onBindChange: function(e) {
-    this.setData({
-      currentItem: this.data.tasks[e.detail.current]
-    })
+    currentItem = this.data.tasks[e.detail.current]
   },
 
   gotoShareImage: function() {
       wx.navigateTo({
-        url: '../share-image/index?task='+JSON.stringify(this.data.currentItem),
+        url: '../share-image/index?task='+JSON.stringify(currentItem),
       })
   },
 
   gotoMovieInfo: function() {
     wx.navigateTo({
-      url: '../movie-info2/index?task=' + JSON.stringify(this.data.currentItem),
+      url: '../movie-info2/index?task=' + JSON.stringify(currentItem),
     })
   }
 

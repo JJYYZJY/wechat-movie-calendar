@@ -4,6 +4,7 @@
     "canvasdrawer": "/libs/canvasdrawer/canvasdrawer",
     "i-message": "../../dist/message/index"
   },
-  "disableScroll": false
+  "disableScroll": false,
+  "navigationBarBackgroundColor": "#F2EFE6"
   
 }

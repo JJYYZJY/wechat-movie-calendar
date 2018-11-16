@@ -1,31 +1,44 @@
 /* miniprogram/pages/share-image/index.wxss */
 @import "../../libs/loading/loading.wxss";
 
+page{
+  background: #F2EFE6;
+}
+
 .center-layout{
   width: fit-content;
-  margin: 10px auto;
+  margin: 0 auto;
 }
 
 .image-canvas{
-  width: 300px;
-  height: 500px;
+  width: 80vw;
+  height: 90vh;
 }
 
 .bottom-layout{
   width: 100vw;
-  padding-bottom: 20px;
+  height: 10vh;
 }
 
 .save-btn{
-  width: 300px;
+  width: 80vw;
+  height: 8vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .tab-text{
-  font-size: 18px;
+  font-size: 36rpx;
   color: rgb(37, 35, 35);
 }
 
 .tab-text-select{
-  font-size: 18px;
+  font-size: 36rpx;
   color: rgb(219, 88, 127);
+}
+
+.toast-text{
+  width: 100vw;
+  text-align: center;
 }

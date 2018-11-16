@@ -12,15 +12,23 @@
   position: absolute;
   top: 0;
   left: 0;
-  -webkit-animation: sk-wanderingCube 1.8s ease-in-out -1.8s infinite both;
+  -webkit-animation: sk-wanderingCube 1.8s ease-in-out 1.8s infinite both;
+          animation: sk-wanderingCube 1.8s ease-in-out 1.8s infinite both;
+}
+
+.sk-wandering-cubes .sk-cube1 {
+  -webkit-animation-delay: 0s;
+          animation-delay: 0s;
 }
 
 .sk-wandering-cubes .sk-cube2 {
-  -webkit-animation-delay: -0.6s;
+  -webkit-animation-delay: 0.6s;
+          animation-delay: 0.6s;
 }
 
 .sk-wandering-cubes .sk-cube3 {
-  -webkit-animation-delay: -1.2s;
+  -webkit-animation-delay: 1.2s;
+          animation-delay: 1.2s;
 }
 
 @-webkit-keyframes sk-wanderingCube {

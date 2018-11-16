@@ -1,0 +1,40 @@
+
+@font-face {
+    font-family:'fangzheng';
+    src:url('https://banana.yuansouti.com/conan-research-audio-wechat/api/audio/fonts/fangzhengqingkebenyuesongjianti.ttf') format('truetype');
+}
+
+.zhfont {
+  font-family:"fangzheng" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+@font-face {
+    font-family:'segoeui';
+    src:url('https://banana.yuansouti.com/conan-research-audio-wechat/api/audio/fonts/segoeui.ttf') format('truetype');
+}
+
+.title_e_font {
+  font-family:"segoeui" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@font-face {
+    font-family:'pingfang';
+    src:url('https://banana.yuansouti.com/conan-research-audio-wechat/api/audio/fonts/PingFangMedium.ttf') format('truetype');
+}
+
+.label_font {
+  font-family:"pingfang" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

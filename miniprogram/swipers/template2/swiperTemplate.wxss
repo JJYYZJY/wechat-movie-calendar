@@ -1,0 +1,142 @@
+@import "../../assets/star.wxss";
+@import "../../assets/number.wxss";
+/* @import "../../assets/zhfont.wxss"; */
+.page-layout{
+  width: 100vw;
+  height: 100vh;
+}
+.head-layout{
+  width: 100vw;
+  height: 20vh;
+  display: flex;
+  flex-direction: row;
+  justify-content:center;
+  align-items: center;
+}
+
+.head-layout-left{
+  width: 50vw;
+  height: 168rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.head-layout-right{
+  width: 50vw;
+  height: 168rpx;
+  margin-right: 29rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.title-text{
+  font-size: 48rpx;
+  line-height: 48rpx;
+  letter-spacing: 1rpx;
+  white-space: nowrap;
+}
+
+.title-e-text{
+  padding-top: 20rpx;
+  font-size: 28rpx;
+  line-height: 28rpx;
+  letter-spacing: 1rpx;
+  white-space: nowrap;
+  font-style: italic;
+  color: rgba(0,0,0,1);
+}
+
+.label-text{
+  margin-left: 29rpx;
+  margin-top: 10rpx;
+  font-size: 20rpx;
+  line-height: 20rpx;
+  letter-spacing: 2rpx;
+  white-space: nowrap;
+}
+
+.text-right{
+  text-align: right;
+}
+
+.history-text{
+  color: rgb(219, 88, 127);
+}
+
+.rating-layout{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+}
+
+.float-text{
+  float: left;
+}
+
+.star-layout{
+  height: 10rpx;
+  margin-bottom: 2rpx;
+}
+
+.star-text{
+  float: left;
+  margin-left: 2rpx;
+  color:#FFB86C;
+  width: 10rpx;
+  height: 10rpx;
+}
+
+.image-layout{
+  width: 100vw;
+  height: 422rpx;
+}
+
+.movie-image{
+  width: 100vw;
+  height: 422rpx;
+}
+
+.body-layout{
+  width: 100vw;
+  height: calc(80vh - 422rpx);
+}
+
+.date-layout{
+  width: 100vw;
+  height: 60%;
+  display: flex;
+  justify-content:center;
+  align-items: center;
+}
+
+.date-text{
+  display: block;
+  line-height: 225rpx;
+  padding: 0px;
+  font-size: 225rpx;
+}
+
+.saying-layout{
+  width: fit-content;
+  height: 36%;
+  margin: 0px auto 0px auto;
+  padding: 0rpx  60rpx;
+}
+
+.saying-text{
+  font-size: 34rpx;
+}
+
+.footer-layout{
+  width: 100vw;
+  height: 4%;
+  display: flex;
+  justify-content:center;
+  align-items: flex-start;
+}
+
+.footer-line{
+  width: 20vw;
+  height: 2px;
+  background-color: rgb(219, 88, 127);
+}

@@ -38,7 +38,9 @@ function initSystemInfo(success){
       that.systemVersion = res.SDKVersion,
       that.systemInfo = {
         windowWidth: res.windowWidth,
-        windowHeight: res.windowHeight
+        windowHeight: res.windowHeight,
+        screenWidth: res.screenWidth,
+        screenHeight: res.screenHeight
       }
       success(res);
     },
@@ -51,7 +53,9 @@ function getSystemInfo(){
     let res = wx.getSystemInfoSync()
     this.systemInfo = {
       windowWidth: res.windowWidth,
-      windowHeight: res.windowHeight
+      windowHeight: res.windowHeight,
+      screenWidth: res.screenWidth,
+      screenHeight: res.screenHeight
     }
   }
   return this.systemInfo;

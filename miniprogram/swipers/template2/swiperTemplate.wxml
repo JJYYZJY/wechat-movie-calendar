@@ -1,0 +1,51 @@
+<template name="calendar-page">
+
+  <view class='page-layout'>
+  
+  <view class='head-layout'>
+    <view class='head-layout-left'>
+      <text class='zhfont title-text'>{{'《'+item.title+'》'}}</text>
+      <text class='label_font label-text'>{{item.genres}}</text>
+      <text class='label_font label-text'>导演: {{item.director}}</text>
+      <text class='label_font label-text'>{{item.release}}上映</text>
+      <view class='rating-layout'>
+        <text class='label_font label-text float-text'>豆瓣评分 {{item.rating}}</text>
+        <view class='star-layout'>
+          <image class='star-text' src='{{item.rating >= 2 ? "../../images/star_02.png" : item.rating >= 1 ? "../../images/star_04.png" : "../../images/star_01.png"}}'></image>
+          <image class='star-text' src='{{item.rating >= 4 ? "../../images/star_02.png" : item.rating >= 3 ? "../../images/star_04.png" : "../../images/star_01.png"}}'></image>
+          <image class='star-text' src='{{item.rating >= 6 ? "../../images/star_02.png" : item.rating >= 5 ? "../../images/star_04.png" : "../../images/star_01.png"}}'></image>
+          <image class='star-text' src='{{item.rating >= 8 ? "../../images/star_02.png" : item.rating >= 7 ? "../../images/star_04.png" : "../../images/star_01.png"}}'></image>
+          <image class='star-text' src='{{item.rating >= 9.5 ? "../../images/star_02.png" : item.rating >= 8.5 ? "../../images/star_04.png" : "../../images/star_01.png"}}'></image>
+        </view>
+      </view>
+    </view>
+
+    <view class='head-layout-right'>
+      <text class='title_e_font title-e-text text-right'>{{item.title_e}}</text>
+      <text class='label_font label-text text-right'>{{item._month_zh}}</text>
+      <text class='label_font label-text text-right'>{{item._week_zh}}</text>
+      <text class='label_font label-text text-right'>{{item._lunar}}</text>
+      <text class='label_font label-text text-right history-text'>{{item.history_today_message}}</text>
+    </view>
+  </view>
+  
+  <view class='image-layout' bindtap='gotoMovieInfo'>
+    <image class='movie-image' mode='aspectFill' src='{{item.images}}' lazy-load="{{true}}"></image>
+  </view>
+
+  <view class='body-layout'>
+    <view class='date-layout'>
+      <view class='numberfont date-text'>{{item._day}}</view>
+    </view>
+
+    <view class='saying-layout'>
+        <text class='zhfont saying-text'>{{item.saying}}</text>
+    </view>
+
+    <view class='footer-layout'>
+      <view class='footer-line'></view>
+    </view>
+  </view>
+  </view>
+
+</template>

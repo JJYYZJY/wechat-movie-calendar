@@ -1,6 +1,14 @@
 // miniprogram/pages/share-image/index.js
 const { $Message } = require('../../dist/base/index');
+const systemInfoUtil = require('../../utils/systemInfoUtil.js');
 const db = wx.cloud.database();
+var screenWidth = null;
+var screenHeight = null;
+var windowHeight = null;
+var image_tempFileUrl = null;
+var acode_tempFileUrl = null;
+var mainImageInfo = null;
+var task = null;
 
 Page({
 
@@ -9,12 +17,7 @@ Page({
    */
   data: {
     imageType: 1,
-    imageUrl: null,
-    sayingUrl: null,
-    task: null,
-    image_tempFileUrl: null,
-    acode_tempFileUrl: null,
-    mainImageInfo: null
+    imageUrl: null
   },
 
   canvasDayImage: function () {
@@ -24,7 +27,7 @@ Page({
     this.setData({
       imageType:1
     })
-    this.drawImage(this, this.data.task, this.data.image_tempFileUrl, this.data.acode_tempFileUrl, this.data.mainImageInfo)
+    this.drawNewImage(this, task, image_tempFileUrl, acode_tempFileUrl, mainImageInfo)
   },
 
   canvasSayingImage: function () {
@@ -34,7 +37,7 @@ Page({
     this.setData({
       imageType: 2
     })
-    this.drawSayingImage(this, this.data.task, this.data.image_tempFileUrl, this.data.acode_tempFileUrl, this.data.mainImageInfo)
+    this.drawSayingImage(this, task, image_tempFileUrl, acode_tempFileUrl, mainImageInfo)
   },
 
   eventGetImage: function (event) {
@@ -42,6 +45,12 @@ Page({
     this.setData({
       imageUrl: event.detail.tempFilePath
     })
+  },
+
+  seeImage: function () {
+    wx.previewImage({
+      urls: [this.data.imageUrl]
+    });
   },
 
   saveCanvasImage() {
@@ -278,6 +287,275 @@ Page({
 
   },
 
+  drawNewImage: function (that, task, imageUrl, acodeUrl, mainImageInfo) {
+    console.log('drawNewImage task', task, 'imageUrl', imageUrl, 'acodeUrl', acodeUrl);
+
+    var rpxRate = screenWidth / 750;
+
+    var width = screenWidth;
+    var height = screenHeight;
+
+    var paddingTop = (screenHeight - windowHeight) / 2;
+
+    var headWidth = width;
+    var headHeight = screenHeight * 0.2 + paddingTop;
+
+    var imageWidth = width;
+    var imageHeight = 422 * rpxRate;
+
+    var dateWidth = width;
+    var dateHeight = (screenHeight - headHeight - imageHeight) * 0.6;
+    var sayingHeight = (screenHeight - headHeight - imageHeight) * 0.36;
+
+    var line1Height = 48 * rpxRate;
+    var line2Height = 20 * rpxRate;
+    var linePadding = 10 * rpxRate;
+
+    var paddingLeft = 16 * rpxRate;
+
+    var headContentHeight = line1Height+line2Height*4+linePadding*4;
+
+    var line1Top = (headHeight - headContentHeight - paddingTop) / 2 + paddingTop
+    var line2Top = line1Top+line1Height+linePadding;
+    var line3Top = line2Top + line2Height + linePadding;
+    var line4Top = line3Top + line2Height + linePadding;
+    var line5Top = line4Top + line2Height + linePadding;
+
+    var dateSize = 225 * rpxRate;
+    var dateTop = (dateHeight - dateSize) / 2 + headHeight + imageHeight;
+
+    var sayingSize = 34 * rpxRate;
+    var sayingTop = headHeight + imageHeight + dateHeight;
+    var footerTop = sayingTop + sayingHeight;
+
+    var imageSourceWidth = 0;
+    var imageSourceHeight = 0;
+    var mwr = mainImageInfo.width / imageWidth;
+    var mhr = mainImageInfo.height / imageHeight;
+    console.log(mwr, mhr)
+    var imageSourceTop = 0;
+    var imageSourceLeft = 0;
+    if (mwr < mhr) {
+      imageSourceWidth = mainImageInfo.width;
+      imageSourceHeight = imageHeight * mwr;
+      imageSourceTop = (mainImageInfo.height - imageSourceHeight) / 2;
+    } else if (mhr < mwr) {
+      imageSourceWidth = imageWidth * mhr;
+      imageSourceHeight = mainImageInfo.height;
+      imageSourceLeft = (mainImageInfo.width - imageSourceWidth) / 2;
+    }
+    console.log(mainImageInfo.width, mainImageInfo.height, mainImageInfo.width / mainImageInfo.height)
+    console.log(imageSourceWidth, imageSourceHeight, imageSourceWidth / imageSourceHeight)
+    console.log(imageWidth, imageHeight, imageWidth / imageHeight)
+    console.log(imageSourceTop, imageSourceLeft)
+
+    that.setData({
+      painting: {
+        width: width,
+        height: height,
+        views: [
+          {
+            type: 'rect',
+            background: '#FFFFFF',
+            top: 0,
+            left: 0,
+            width: width,
+            height: height
+          },
+          {
+            type: 'image',
+            url: imageUrl,
+            top: headHeight,
+            left: 0,
+            width: imageWidth,
+            height: imageHeight,
+            sTop: imageSourceTop,
+            sLeft: imageSourceLeft,
+            sWidth: imageSourceWidth,
+            sHeight: imageSourceHeight
+          }
+          ,
+          {
+            type: 'text',
+            content: "《" + task.title + "》",
+            fontSize: line1Height,
+            textAlign: 'left',
+            top: line1Top,
+            left: 0
+          }
+          ,
+          {
+            type: 'text',
+            content: task.genres,
+            fontSize: line2Height,
+            textAlign: 'left',
+            top: line2Top,
+            left: paddingLeft
+          }
+          ,
+          {
+            type: 'text',
+            content: '导演: '+task.director,
+            fontSize: line2Height,
+            textAlign: 'left',
+            top: line3Top,
+            left: paddingLeft
+          }
+          ,
+          {
+            type: 'text',
+            content: task.release + '上映',
+            fontSize: line2Height,
+            textAlign: 'left',
+            top: line4Top,
+            left: paddingLeft
+          }
+          ,
+          {
+            type: 'text',
+            content: '豆瓣评分 ' + task.rating,
+            fontSize: line2Height,
+            textAlign: 'left',
+            top: line5Top,
+            left: paddingLeft
+          }
+          ,
+          {
+            type: 'image',
+            url: task.rating >= 2 ? "../../images/star_02.png" : task.rating >= 1 ? "../../images/star_04.png" : "../../images/star_01.png",
+            top: line5Top + line2Height - 8 * rpxRate,
+            left: 136 * rpxRate,
+            width: 8 * rpxRate,
+            height: 8 * rpxRate
+          }
+          ,
+          {
+            type: 'image',
+            url: task.rating >= 4 ? "../../images/star_02.png" : task.rating >= 3 ? "../../images/star_04.png" : "../../images/star_01.png",
+            top: line5Top + line2Height - 8 * rpxRate,
+            left: 148 * rpxRate,
+            width: 8 * rpxRate,
+            height: 8 * rpxRate
+          }
+          ,
+          {
+            type: 'image',
+            url: task.rating >= 6 ? "../../images/star_02.png" : task.rating >= 5 ? "../../images/star_04.png" : "../../images/star_01.png",
+            top: line5Top + line2Height - 8 * rpxRate,
+            left: 160 * rpxRate,
+            width: 8 * rpxRate,
+            height: 8 * rpxRate
+          }
+          ,
+          {
+            type: 'image',
+            url: task.rating >= 8 ? "../../images/star_02.png" : task.rating >= 7 ? "../../images/star_04.png" : "../../images/star_01.png",
+            top: line5Top + line2Height - 8 * rpxRate,
+            left: 172 * rpxRate,
+            width: 8 * rpxRate,
+            height: 8 * rpxRate
+          }
+          ,
+          {
+            type: 'image',
+            url: task.rating >= 9.5 ? "../../images/star_02.png" : task.rating >= 8.5 ? "../../images/star_04.png" : "../../images/star_01.png",
+            top: line5Top + line2Height - 8 * rpxRate,
+            left: 184 * rpxRate,
+            width: 8 * rpxRate,
+            height: 8 * rpxRate
+          }
+          ,
+          {
+            type: 'text',
+            content: task.title_e,
+            fontSize: 28 * rpxRate,
+            textAlign: 'right',
+            top: line1Top + 20 * rpxRate,
+            left: width - paddingLeft
+          }
+          ,
+          {
+            type: 'text',
+            content: task._month_zh,
+            fontSize: line2Height,
+            textAlign: 'right',
+            top: line2Top,
+            left: width - paddingLeft
+          }
+          ,
+          {
+            type: 'text',
+            content: task._week_zh,
+            fontSize: line2Height,
+            textAlign: 'right',
+            top: line3Top,
+            left: width - paddingLeft
+          }
+          ,
+          {
+            type: 'text',
+            content: task._lunar,
+            fontSize: line2Height,
+            textAlign: 'right',
+            top: line4Top,
+            left: width - paddingLeft
+          }
+          ,
+          {
+            type: 'text',
+            content: task.history_today_message,
+            fontSize: line2Height,
+            textAlign: 'right',
+            top: line5Top,
+            left: width - paddingLeft,
+            color: 'rgb(219, 88, 127)'
+          }
+          ,
+          {
+            type: 'text',
+            content: task._day,
+            fontSize: dateSize,            
+            textAlign: 'center',
+            top: dateTop,
+            left: width / 2,
+          }
+          ,
+          {
+            type: 'text',
+            content: task.saying,
+            fontSize: sayingSize,
+            textAlign: 'center',
+            top: headHeight + imageHeight + dateHeight,
+            left: width / 2,
+            width: width - paddingLeft * 8,
+            MaxLineNumber: 3,
+            breakWord: true,
+            lineHeight: sayingSize + 16 * rpxRate
+          }
+          ,
+          {
+            type: 'rect',
+            background: '#f00',
+            top: footerTop,
+            left: width/2 - 60 * rpxRate,
+            width: 120 * rpxRate,
+            height: 2
+          },
+          {
+            type: 'image',
+            url: acodeUrl,
+            top: height - 120 * rpxRate,
+            left: width - 120 * rpxRate,
+            width: 100 * rpxRate,
+            height: 100 * rpxRate
+          }
+        ]
+      }
+    })
+
+
+  },
+
   drawSayingImage: function (that, task, imageUrl, acodeUrl, mainImageInfo) {
     console.log('drawSayingImage task', task, 'imageUrl', imageUrl, 'acodeUrl', acodeUrl);
 
@@ -440,27 +718,20 @@ Page({
   onLoad: function (options) {
     var that = this;
     console.log('options',options);
-    let task = JSON.parse(options.task);
+    task = JSON.parse(options.task);
     console.log('item',task);
-    this.setData({
-      task:task
-    })
     wx.cloud.downloadFile({
       fileID: task.images,
       success: function(res){
         console.log('image getTempFileURL', res);
-        that.setData({
-          image_tempFileUrl: res.tempFilePath
-        })
+        image_tempFileUrl = res.tempFilePath
         wx.getImageInfo({
           src: res.tempFilePath,
           success: imageInfoRes => {
             console.log('getImageInfo',imageInfoRes);
-            that.setData({
-              mainImageInfo: imageInfoRes
-            })
-            if (that.data.acode_tempFileUrl) {
-              that.drawImage(that, that.data.task, res.tempFilePath, that.data.acode_tempFileUrl, imageInfoRes)
+            mainImageInfo = imageInfoRes
+            if (acode_tempFileUrl) {
+              that.drawNewImage(that, task, res.tempFilePath, acode_tempFileUrl, imageInfoRes)
             }
           }
         })
@@ -473,25 +744,30 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+    let systemInfo = systemInfoUtil.getSystemInfo();
+    screenWidth = systemInfo.screenWidth;
+    screenHeight = systemInfo.screenHeight;
+    windowHeight = systemInfo.windowHeight;
     var that = this;
-
-    db.collection('acode-images').where({
-      name: 'acode-small'
-    }).get().then(res => {
-      console.log('acode result ', res);
-      wx.cloud.downloadFile({
-        fileID: res.data[0].url,
-        success: function (res) {
-          console.log('acode getTempFileURL', res);
-          that.setData({
-            acode_tempFileUrl: res.tempFilePath
-          })
-          if(that.data.image_tempFileUrl){
-            that.drawImage(that,that.data.task, that.data.image_tempFileUrl, res.tempFilePath, that.data.mainImageInfo)
-          }
-        }
-      });
-    })
+    acode_tempFileUrl = '../../images/movie_code.jpg';
+    if (image_tempFileUrl) {
+      that.drawNewImage(that,task, image_tempFileUrl, res.tempFilePath, mainImageInfo)
+    }
+    // db.collection('acode-images').where({
+    //   name: 'acode-small'
+    // }).get().then(res => {
+    //   console.log('acode result ', res);
+    //   wx.cloud.downloadFile({
+    //     fileID: res.data[0].url,
+    //     success: function (res) {
+    //       console.log('acode getTempFileURL', res);
+    //       acode_tempFileUrl = res.tempFilePath
+    //       if(image_tempFileUrl){
+    //         that.drawNewImage(that,task, image_tempFileUrl, res.tempFilePath, mainImageInfo)
+    //       }
+    //     }
+    //   });
+    // })
   },
 
   /**

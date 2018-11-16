@@ -1,15 +1,15 @@
 <!--miniprogram/pages/share-image/index.wxml-->
 <import src="../../libs/loading/loading.wxml"/>
 <template wx:if="{{!imageUrl}}" is="loading1"></template>
-<text wx:if="{{!imageUrl}}">生成图片比较耗时请耐心等待，预计需要10秒左右</text>
+<view class='toast-text' wx:if="{{!imageUrl}}">生成图片中请耐心等待...</view>
 <canvasdrawer painting="{{painting}}" bind:getImage="eventGetImage"/>
-<view hidden='{{!imageUrl}}' class='center-layout'>
+<!-- <view hidden='{{!imageUrl}}' class='center-layout'>
   <text class='{{imageType == 1 ? "tab-text-select" : "tab-text"}}' bindtap='canvasDayImage'>日历图</text>
   <text> | </text>
   <text class='{{imageType != 1 ? "tab-text-select" : "tab-text"}}' bindtap='canvasSayingImage'>台词图</text>
-</view>
+</view> -->
 <view hidden='{{!imageUrl}}' class='center-layout'>
-  <image class='image-canvas' mode='widthFix' src='{{imageUrl}}'></image>
+  <image class='image-canvas' mode='widthFix' src='{{imageUrl}}' bindtap='seeImage'></image>
 </view>
 <view class='bottom-layout'>
   <button hidden='{{!imageUrl}}' class='save-btn' bindtap='saveCanvasImage'>保存图片</button>

@@ -1,6 +1,6 @@
 /* miniprogram/pages/calendar-home/index.wxss */
 @import "../../assets/star.wxss";
-@import "/hSwiper/swiperTemplate.wxss";
+@import "/swipers/template2/swiperTemplate.wxss";
 
 .swiper-layout{
   width: 100vw;
