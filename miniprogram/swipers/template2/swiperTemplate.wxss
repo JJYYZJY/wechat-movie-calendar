@@ -125,6 +125,11 @@
 
 .saying-text{
   font-size: 34rpx;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
 }
 
 .footer-layout{

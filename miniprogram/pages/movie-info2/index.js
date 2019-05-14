@@ -87,5 +87,21 @@ Page({
       title: "今日电影《"+this.data.item.title+"》",
       path: this.route+'?source=movieInfo&movieId='+this.data.item._id
     }
+  },
+
+  cpMovieName: function () {
+    wx.setClipboardData({
+      data: this.data.item.title,
+      success(res) {
+      }
+    })
+  },
+
+  cpPublicName: function () {
+    wx.setClipboardData({
+      data: '电影日历Plus',
+      success(res) {
+      }
+    })
   }
 })

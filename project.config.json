@@ -12,6 +12,8 @@
 	"appid": "wx242c1fb6898a6ec3",
 	"projectname": "movie-calendar",
 	"libVersion": "2.2.5",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
 	"condition": {
 		"search": {
 			"current": -1,

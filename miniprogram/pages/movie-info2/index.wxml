@@ -61,6 +61,8 @@
     <view class='label-text'>资源:</view>
     <text class='info-text' space='ensp'>{{item.toast}}</text>
   </view>
+  <button bindtap='cpMovieName'>点击复制电影名称</button>
+  <button bindtap='cpPublicName'>点击复制公众号名称</button>
 
 </view>
 
