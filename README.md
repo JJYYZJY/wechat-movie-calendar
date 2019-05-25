@@ -1,4 +1,4 @@
-电影日历Plus
+Ftime电影日历
 
 ![1_.pic.jpg](img/1.pic.jpg)
 ![2_.pic.jpg](img/2.pic.jpg)
